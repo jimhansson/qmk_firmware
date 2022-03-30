@@ -5,13 +5,14 @@
 
 bool __WEAK__ process_record_keymap(uint16_t keycode, keyrecord_t *record) {return true;};
 
-#ifdef AUDIO_ENABLE
+#if defined(AUDIO_ENABLE) || defined(STENO_ENABLE)
   float plover_song[][2]     = SONG(PLOVER_SOUND);
   float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
+#ifdef STENO_ENABLE
   case PLOVER:
     if (record->event.pressed) {
 #ifdef AUDIO_ENABLE
@@ -33,11 +34,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed)
       PLAY_SONG(plover_gb_song);
 #endif
+#endif // STENO_ENABLE
   case EXT_CFG:
     if (record->event.pressed) {
       // handling both in same case, if I have entered cfg from plover
       // this might be odd but would be seldom..
+#ifdef STENO_ENABLE
       layer_off(_PLOVER);
+#endif
       layer_off(_CFG);
       return false;
       break;
@@ -49,81 +53,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-
-/// leader stuff
-
-bool did_leader_succeed; // used in leader_start/end_keymap functions
-
-LEADER_EXTERNS();
-void __WEAK__ matrix_scan_keymap(void) {;}
-void __WEAK__ leader_start_keymap(void) {;}
-void __WEAK__ leader_end_keymap(bool succeeded) {;}
-
-void matrix_scan_user(void) {
-  LEADER_DICTIONARY() {
-    did_leader_succeed = leading = false;
-
-    SEQ_FOUR_KEYS(SE_C, SE_O, SE_N, SE_F) {
-      // switch to layer for configuration
-      layer_on(_CFG);
-      did_leader_succeed = true;
-    }
-
-    // keep the sequences in order
-    SEQ_TWO_KEYS(KC_D, KC_D) {
-      SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-      did_leader_succeed = true;
-    }
-    SEQ_THREE_KEYS(KC_D, KC_D, KC_S) {
-      SEND_STRING("https://start.duckduckgo.com\n");
-      did_leader_succeed = true;
-    }
-
-    SEQ_THREE_KEYS(SE_E, SE_S, SE_C) {
-      // ESC = escape key
-      register_code(KC_ESC);
-      unregister_code(KC_ESC);
-      did_leader_succeed = true;
-    }
-    SEQ_THREE_KEYS(SE_E, SE_S, SE_D) {
-      // ESC = escape key
-      register_code(KC_ESC);
-      unregister_code(KC_ESC);
-      did_leader_succeed = true;
-    }
-    SEQ_THREE_KEYS(SE_E, SE_S, SE_E) {
-      // ESC = escape key
-      register_code(KC_ESC);
-      unregister_code(KC_ESC);
-      did_leader_succeed = true;
-    }
-
-    SEQ_THREE_KEYS(SE_E, SE_S, SE_F) {
-      // ESC = escape key
-      register_code(KC_ESC);
-      unregister_code(KC_ESC);
-      did_leader_succeed = true;
-    }
-
-    SEQ_FIVE_KEYS(SE_R, SE_E, SE_S, SE_E, SE_T) {
-      reset_keyboard();
-      did_leader_succeed = true;
-    }
-    SEQ_FIVE_KEYS(SE_S, SE_T, SE_E, SE_N, SE_O) {
-      // switch to steno layer
-      layer_on(_PLOVER);
-      did_leader_succeed = true;
-    }
-
-    leader_end();
-  }
-  matrix_scan_keymap();
-}
-
-void leader_start(void) {
-  leader_start_keymap();
-}
-
-void leader_end(void) {
-  leader_end_keymap(did_leader_succeed);
-}

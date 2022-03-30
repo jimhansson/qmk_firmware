@@ -12,8 +12,8 @@ NKRO_ENABLE = yes
 LTO_ENABLE = yes
 #EXTRAFLAGS        += -flto
 
-# steno support
-STENO_ENABLE = yes
+# steno support of until I actually start to use.
+STENO_ENABLE = no
 
 # space cadet
 SPACE_CADET_ENABLE = yes
@@ -28,11 +28,17 @@ LEADER_ENABLE = yes
 # yes I use them
 MOUSEKEY_ENABLE = yes
 
-DYNAMIC_MACRO_ENABLE = yes
+DYNAMIC_MACRO_ENABLE = no
 
+COMBO_ENABLE = yes
+
+KEY_OVERRIDE_ENABLE = yes
+
+AUDIO_ENABLE = yes
 # Include common utilities shared across all our keymaps.
-SRC += jim.c
-
+SRC += jim.c \
+       combos.c \
+       overrides.c
 #PROGRAMMABLE_BUTTON_ENABLE = yes
 
 # Disable unwanted build options on all keyboards. (Mouse keys are turned off
@@ -49,7 +55,6 @@ SLEEP_LED_ENABLE = no
 
 # Disable other unused options on all keyboards.
 QMK_SETTINGS = no
-COMBO_ENABLE = no
 GRAVE_ESC_ENABLE = no
 KEY_LOCK_ENABLE = no
 MAGIC_ENABLE = no

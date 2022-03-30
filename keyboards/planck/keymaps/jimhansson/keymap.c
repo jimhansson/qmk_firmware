@@ -20,9 +20,6 @@
 
 #include <shared_layers.h>
 
-#define LOWER MO(_LOWER)
-#define RAISE MO(_RAISE)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -36,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Auto |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   -   | Shift  |
  * | Shift| CTRL |      |      |      |      |      |      |      |      | CTRL  |        |
  * |------+------+------+------+------+------+------+------+------+------+-------+--------|
- * | Brite| Ctrl | Alt  | GUI  |BSpace| Enter|Space | Tab | Down  |   ^  |   *   |SYMBOLS |
+ * | Brite| Ctrl | Alt  | GUI  |BSpace| Enter|Space | Tab  | Down |   ^  |   *   |SYMBOLS |
  * |      |      |      |      |      |      |      |      |      |      |       |        |
  * `--------------------------------------------------------------------------------------'
  */
@@ -46,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSPO,               CTL_T(SE_Z),    SE_X,     SE_C,    SE_V,    SE_B,    SE_N,    SE_M,  SE_COMM,  SE_DOT,   CTL_T(SE_MINS),           KC_RSPC,
     LT(_SYMBOLS,SE_QUOT),      SE_ACUT, KC_LALT,  KC_LGUI, KC_BSPC,  KC_ENT,  KC_SPC,  KC_TAB,  KC_DOWN,  SE_CIRC,  SE_ASTR,             TT(_SYMBOLS)
 ),
-
+#if 0
 /* Colemak
  * ,-----------------------------------------------------------------------------------.
  * | XXXX |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
@@ -59,10 +56,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = LAYOUT_planck_grid(
-    XXXXXXX,  SE_Q,    SE_W,    SE_F,    SE_P,    SE_G,    SE_J,    SE_L,    SE_U,    SE_Y,    SE_SCLN, KC_BSPC,
-    KC_LEAD,  SE_A,    SE_R,    SE_S,    SE_T,    SE_D,    SE_H,    SE_N,    SE_E,    SE_I,    SE_O,    SE_QUOT,
-    KC_LSPO,  SE_Z,    SE_X,    SE_C,    SE_V,    SE_B,    SE_K,    SE_M,    SE_COMM, SE_DOT,  SE_SLSH,  KC_ENT,
-    BACKLIT,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    XXXXXXX,  SE_Q,    SE_W,    SE_F,       SE_P,     SE_G,    SE_J,    SE_L,    SE_U,    SE_Y,    SE_SCLN, KC_BSPC,
+    KC_LEAD,  SE_A,    SE_R,    SE_S,       SE_T,     SE_D,    SE_H,    SE_N,    SE_E,    SE_I,    SE_O,    SE_QUOT,
+    KC_LSPO,  SE_Z,    SE_X,    SE_C,       SE_V,     SE_B,    SE_K,    SE_M,    SE_COMM, SE_DOT,  SE_SLSH,  KC_ENT,
+    BACKLIT,  KC_LCTL, KC_LALT, KC_LGUI, KC_BSPC,   KC_ENT,  KC_SPC,  KC_TAB,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 /* Dvorak
  * ,-----------------------------------------------------------------------------------.
@@ -76,11 +73,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_DVORAK] = LAYOUT_planck_grid(
-    XXXXXXX, SE_QUOT, SE_COMM, SE_DOT,  SE_P,    SE_Y,    SE_F,    SE_G,    SE_C,    SE_R,    SE_L,    KC_BSPC,
-    KC_LEAD, SE_A,    SE_O,    SE_E,    SE_U,    SE_I,    SE_D,    SE_H,    SE_T,    SE_N,    SE_S,    SE_SLSH,
-    KC_LSPO, SE_SCLN, SE_Q,    SE_J,    SE_K,    SE_X,    SE_B,    SE_M,    SE_W,    SE_V,    SE_Z,     KC_ENT,
-    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    XXXXXXX,  SE_QUOT, SE_COMM,  SE_DOT,    SE_P,     SE_Y,    SE_F,    SE_G,    SE_C,    SE_R,    SE_L,    KC_BSPC,
+    KC_LEAD,     SE_A,    SE_O,    SE_E,    SE_U,     SE_I,    SE_D,    SE_H,    SE_T,    SE_N,    SE_S,    SE_SLSH,
+    KC_LSPO,  SE_SCLN,    SE_Q,    SE_J,    SE_K,     SE_X,    SE_B,    SE_M,    SE_W,    SE_V,    SE_Z,     KC_ENT,
+    BACKLIT,  KC_LCTL, KC_LALT, KC_LGUI, KC_BSPC,   KC_ENT,  KC_SPC,  KC_TAB,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
+#endif
 /* symbols
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   @  |   {  |   }  |   \  |   %  |      |   7  |   8  |   9  |   *  | Bksp |
@@ -113,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, KC_BTN1, KC_BTN3, KC_BTN2, _______, KC_PGDN, _______,  _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______
 ),
-
+#if 0
 /* Lower
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
@@ -149,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
-
+#endif
 /* Plover layer (http://opensteno.org)
  * ,-----------------------------------------------------------------------------------.
  * |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |
@@ -161,30 +159,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Exit |      |      |   A  |   O  |             |   E  |   U  |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-
+#ifdef STENO_ENABLE
 [_PLOVER] = LAYOUT_planck_grid(
     KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1   ,
     XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
     XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX
 ),
+#endif
 /* CFG
- *         AShift       v------------------------RGB CONTROL--------------------v
+ *         AShift Combo  AUDIO  AUDIO  
  * ,-----------------------------------------------------------------------------------.
- * |      | ASUp |Debug | RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
+ * |      | ASUp |      |      |      |      |      |      |      |      |      |Debug |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Toggle|      |Audoff|Aud on|AGnorm|AGswap|Qwerty|Dvorak|ColeMa|Plover|      |
+ * |      |Toggle|Toggle|Audoff|Aud on|      |      |Qwerty|Dvorak|ColeMa|Plover|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | ASDn |      |Voice-|Voice+|MIDIon|MIDIof|TermOn|TermOf|      |      |      |
+ * |      | ASDn |      |Voice-|Voice+|      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | EXIT |Report|      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
+
+lägg till override toggle
+
 [_CFG] = LAYOUT_planck_grid(
-    _______, KC_ASUP,   DEBUG,   RGB_TOG, RGB_MOD,  RGB_HUI,  RGB_HUD,  RGB_SAI,   RGB_SAD,  RGB_VAI,  RGB_VAD,  _______,
-    _______, KC_ASTG, _______,    AU_OFF,   AU_ON,  AG_NORM,  AG_SWAP,   QWERTY,    DVORAK,  COLEMAK,   PLOVER,  _______,
-    _______, KC_ASDN, _______,    MUV_DE,  MUV_IN,    MI_ON,   MI_OFF,  TERM_ON,  TERM_OFF,  _______,  _______,  _______,
-    EXT_CFG, KC_ASRP, _______,   _______, _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______
+    _______, KC_ASUP, _______,   _______, _______,  _______,  _______,  _______,  _______,  _______,  _______,    DEBUG,
+    _______, KC_ASTG, CMB_TOG,    AU_OFF,   AU_ON,  _______,  _______,   QWERTY,   DVORAK,  COLEMAK,   PLOVER,  _______,
+    _______, KC_ASDN, _______,    MUV_DE,  MUV_IN,  BACKLIT,  _______,  _______,  _______,  _______,  _______,  _______,
+    EXT_CFG, KC_ASRP, _______,   _______, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
 )
 
 
@@ -199,6 +201,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+#if 0
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
@@ -211,6 +214,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+#endif
     case BACKLIT:
       if (record->event.pressed) {
         register_code(KC_RSFT);

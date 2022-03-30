@@ -6,7 +6,9 @@
 
 enum shared_layers {
   _CFG = _LAST_LAYER,
+#ifdef STENO_ENABLE
   _PLOVER,
+#endif
 };
 
 enum shared_keycodes {
