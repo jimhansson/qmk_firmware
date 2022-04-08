@@ -39,10 +39,14 @@ bool process_auto_shift(uint16_t keycode, keyrecord_t *record);
 void retroshift_poll_time(keyevent_t *event);
 void retroshift_swap_times(void);
 
-void     autoshift_enable(void);
-void     autoshift_disable(void);
+void     autoshift_enable(void) __DEPRECATED__("autoshift_on");
+void     autoshift_disable(void) __DEPRECATED__("autoshift_off");
+void     autoshift_on(void);
+void     autoshift_off(void);
 void     autoshift_toggle(void);
-bool     get_autoshift_state(void);
+bool     is_autoshift_on(void);
+bool     get_autoshift_state(void) __DEPRECATED__("is_autoshift_on");
+
 uint16_t get_generic_autoshift_timeout(void);
 // clang-format off
 uint16_t (get_autoshift_timeout)(uint16_t keycode, keyrecord_t *record);

@@ -320,12 +320,28 @@ void autoshift_toggle(void) {
 }
 
 void autoshift_enable(void) {
-    autoshift_flags.enabled = true;
+    autoshift_on();
 }
 
 void autoshift_disable(void) {
+    autoshift_off();
+}
+
+bool get_autoshift_state(void) {
+    return is_autoshift_on();
+}
+
+void autoshift_on(void) {
+    autoshift_flags.enabled = true;
+}
+
+void autoshift_off(void) {
     autoshift_flags.enabled = false;
     autoshift_flush_shift();
+}
+
+bool is_autoshift_on(void) {
+    return autoshift_flags.enabled;
 }
 
 #    ifndef AUTO_SHIFT_NO_SETUP
@@ -337,10 +353,6 @@ void autoshift_timer_report(void) {
     send_string((const char *)display);
 }
 #    endif
-
-bool get_autoshift_state(void) {
-    return autoshift_flags.enabled;
-}
 
 uint16_t get_generic_autoshift_timeout() {
     return autoshift_timeout;
