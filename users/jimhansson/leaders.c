@@ -1,5 +1,9 @@
 
+#include "keymap_swedish.h"
 #include "process_leader.h"
+
+
+#include "shared_layers.h"
 
 /// leader stuff
 

@@ -10,6 +10,29 @@ bool __WEAK__ process_record_keymap(uint16_t keycode, keyrecord_t *record) {retu
   float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
+void show_cfg_settings(void);
+
+void show_cfg_settings() {
+  SEND_STRING(SS_LWIN("r"));
+  wait_ms(50);
+  SEND_STRING("notepad");
+  tap_code(KC_ENT);
+  wait_ms(50);
+  SEND_STRING("AS: ");
+  get_autoshift_state() ? SEND_STRING("on") : SEND_STRING("off");
+  SEND_STRING(" timeout: ");
+  char display[8];
+  snprintf(display, 8, "%d", get_generic_autoshift_timeout());
+  send_string((const char*)display);
+  tap_code(KC_ENT);
+  SEND_STRING("COMBO: ");
+  is_combo_enabled() ? SEND_STRING("on") : SEND_STRING("off");
+  tap_code(KC_ENT);
+  SEND_STRING("KEY OVERRIDE: ");
+  key_override_is_enabled() ? SEND_STRING("on") : SEND_STRING("off");
+  tap_code(KC_ENT);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
 #ifdef STENO_ENABLE
@@ -46,6 +69,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
     }
+  case GAME_ON:
+    if(record->event.pressed) {
+      if(get_autoshift_state())
+	autoshift_disable();
+      if(is_combo_enabled())
+	combo_disable();
+      if(key_override_is_enabled())
+	key_override_off();
+    }
+  case PRINT_CFG_SETTINGS:
+    if(record->event.pressed)
+      show_cfg_settings();
+    return false;
+    break;
   default:
     // pass on to keymap.
     return process_record_keymap(keycode, record);

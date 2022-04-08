@@ -1,2 +1,2 @@
-AUDIO_ENABLE = yes
+AUDIO_ENABLE = no
 #SRC += muse.c

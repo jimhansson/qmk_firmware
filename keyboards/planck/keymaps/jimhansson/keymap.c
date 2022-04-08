@@ -168,24 +168,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 #endif
 /* CFG
- *         AShift Combo  AUDIO  AUDIO  
+ *         AShift Combo  Overid AUDIO  AUDIO  
  * ,-----------------------------------------------------------------------------------.
- * |      | ASUp |      |      |      |      |      |      |      |      |      |Debug |
+ * |      | ASUp |      |      |AudoOn|      |      |      |      |      |      |Debug |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |Toggle|Toggle|Audoff|Aud on|      |      |Qwerty|Dvorak|ColeMa|Plover|      |
+ * |      |Toggle|Toggle|Toggle|Audoff|GameON|      |Qwerty|Dvorak|ColeMa|Plover|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | ASDn |      |Voice-|Voice+|      |      |      |      |      |      |      |
+ * |      | ASDn |      |      |Voice-|Voice+|Backli|      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | EXIT |Report|      |      |      |             |      |      |      |      |      |
+ * | EXIT |Report|      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 
-lägg till override toggle
+
 
 [_CFG] = LAYOUT_planck_grid(
-    _______, KC_ASUP, _______,   _______, _______,  _______,  _______,  _______,  _______,  _______,  _______,    DEBUG,
-    _______, KC_ASTG, CMB_TOG,    AU_OFF,   AU_ON,  _______,  _______,   QWERTY,   DVORAK,  COLEMAK,   PLOVER,  _______,
-    _______, KC_ASDN, _______,    MUV_DE,  MUV_IN,  BACKLIT,  _______,  _______,  _______,  _______,  _______,  _______,
+    _______, KC_ASUP, _______,   _______,   AU_ON,  _______,  _______,  _______,  _______,  _______,  _______,    DEBUG,
+    _______,  AS_TOG, CMB_TOG,   KEY_TOG,  AU_OFF,  GAME_ON,  _______,   QWERTY,   DVORAK,  COLEMAK,   PLOVER,  _______,
+    _______, KC_ASDN, _______,   _______,  MUV_DE,   MUV_IN,  BACKLIT,  _______,  _______,  _______,  _______,  _______,
     EXT_CFG, KC_ASRP, _______,   _______, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
 )
 

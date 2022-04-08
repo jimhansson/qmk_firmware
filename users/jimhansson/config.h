@@ -8,6 +8,9 @@
 #define LSPO_KEYS KC_LSFT, KC_LSFT, KC_8
 #define RSPC_KEYS KC_RSFT, KC_RSFT, KC_9
 
+#define KEY_TOG KEY_OVERRIDE_TOGGLE
+#define AS_TOG KC_ASTG
+
 // make sure we can press as many buttons as possible at the same time.
 #define FORCE_NKRO
 
@@ -24,6 +27,7 @@
 #define LEADER_NO_TIMEOUT
 #define LEADER_PER_KEY_TIMING
 
+#define COMBO_TERM 35
 // we dont have space for that
 #define NO_MUSIC_MODE
 

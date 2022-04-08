@@ -36,9 +36,12 @@ KEY_OVERRIDE_ENABLE = yes
 
 AUDIO_ENABLE = yes
 # Include common utilities shared across all our keymaps.
-SRC += jim.c \
-       combos.c \
-       overrides.c
+SRC +=  \
+	combos.c \
+	overrides.c \
+	leaders.c \
+	process_records.c
+
 #PROGRAMMABLE_BUTTON_ENABLE = yes
 
 # Disable unwanted build options on all keyboards. (Mouse keys are turned off
@@ -47,12 +50,13 @@ SRC += jim.c \
 COMMAND_ENABLE = no
 CONSOLE_ENABLE = no
 TERMINAL_ENABLE = no
-
+AUDIO_ENABLE = no
+BACKLIGHT_ENABLE = no
 # Disable unwanted hardware options on all keyboards. (Some keyboards turn
 # these features on by default even though they aren't actually required.)
 MIDI_ENABLE = no
 SLEEP_LED_ENABLE = no
-
+BOOTMAGIC_ENABLE = no
 # Disable other unused options on all keyboards.
 QMK_SETTINGS = no
 GRAVE_ESC_ENABLE = no
