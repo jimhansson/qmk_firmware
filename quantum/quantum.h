@@ -20,6 +20,9 @@
 #include "matrix.h"
 #include "keymap.h"
 
+// mark function deprecated
+#define DEPRECATED(replacement) __attribute__((deprecated("Functions have been renamed to follow common standard, use " # replacement " instead")))
+
 #ifdef BACKLIGHT_ENABLE
 #    include "backlight.h"
 #endif
