@@ -246,21 +246,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
-    return true;
-}
-
-void leader_end_keymap(bool success) {
-  if(success) {
-    // blink
-  }
-	       
-}
-
-
-// Runs whenever there is a layer state change.
-layer_state_t layer_state_set_user(layer_state_t state) {
- 
+// save layer_state_t so we can turn leds back after signaling other
+// stuff with them. 
+layer_state_t current_layer_state;
+void set_leds_to_layer(layer_state_t state) {
   uint8_t layer = biton32(state);
   
   ergodox_board_led_off();
@@ -297,6 +286,100 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   default:
     break;
   }
-  return state;
+}
 
+enum BlinkPattern {
+  LEADER_SUCCESS,
+  LEADER_FAIL,
+};
+
+static uint16_t blink_timer = 0;
+static uint8_t blink_current_pattern = 255;
+static uint16_t blink_interval = 200;
+static uint8_t blink_state = 0; // inverse of blink_iterations could
+				// be merged. 
+static uint8_t blink_iterations = 255;
+
+void blink_set_pattern(uint8_t pattern, uint16_t interval, uint8_t iterations) {
+  blink_current_pattern = pattern;
+  blink_interval = interval;
+  blink_iterations = iterations;
+  blink_timer = timer_read();
+}
+
+void blink_leader_success(uint8_t state) {
+  ergodox_right_led_1_off();
+  ergodox_right_led_2_off();
+  ergodox_right_led_3_off();
+  
+  switch(state % 3) {
+  case 0:
+    ergodox_right_led_1_on();
+    break;
+  case 1:
+    ergodox_right_led_2_on();
+    break;
+  case 2:
+    ergodox_right_led_3_on();
+    break;
+  }
+}
+
+void blink_leader_fail(uint8_t state) {
+  ergodox_right_led_1_off();
+  ergodox_right_led_2_off();
+  ergodox_right_led_3_off();
+  
+  switch(state % 2) {
+  case 0:
+    ergodox_right_led_1_on();
+    ergodox_right_led_2_on();
+    break;
+  }
+}
+
+void leds_blinks(void) {
+  if(blink_current_pattern != 255 && blink_iterations != 0) {
+    blink_iterations--;
+    if(blink_iterations) {
+      if(timer_elapsed(blink_timer) > blink_interval) {
+	blink_timer = timer_read();
+	blink_state++;
+	switch(blink_current_pattern) {
+	case LEADER_SUCCESS: blink_leader_success(blink_state);
+	  break;
+	case LEADER_FAIL: blink_leader_fail(blink_state);
+	  break;
+	}
+      }
+    } else { // iterations has ended, reset
+      blink_current_pattern = 255;
+      blink_state = 0;
+      blink_iterations = 255;
+      set_leds_to_layer(current_layer_state);
+    }
+    
+  }
+}
+
+void matrix_scan_keymap(void) {
+  leds_blinks(); // check if we should do some weird blinking;
+}
+
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
+
+void leader_end_keymap(bool success) {
+  if(success)
+    blink_set_pattern(LEADER_SUCCESS,200, 9);
+  else
+    blink_set_pattern(LEADER_FAIL, 300, 5);	       
+}
+
+// Runs whenever there is a layer state change.
+layer_state_t layer_state_set_user(layer_state_t state) {
+  current_layer_state = state;
+  set_leds_to_layer(current_layer_state);
+  return state;
 };
