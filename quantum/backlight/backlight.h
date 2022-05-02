@@ -20,6 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "quantum.h"
+
 #ifndef BACKLIGHT_LEVELS
 #    define BACKLIGHT_LEVELS 3
 #elif BACKLIGHT_LEVELS > 31
@@ -46,9 +48,12 @@ typedef union {
 
 void    backlight_init(void);
 void    backlight_toggle(void);
-void    backlight_enable(void);
-void    backlight_disable(void);
-bool    is_backlight_enabled(void);
+void    backlight_on(void);
+void    backlight_off(void);
+bool    is_backlight_on(void);
+void    backlight_enable(void) DEPRECATED("is_backlight_on"); 
+void    backlight_disable(void) DEPRECATED("is_backlight_off"); 
+bool    is_backlight_enabled(void) DEPRECATED("is_backlight_on"); 
 void    backlight_step(void);
 void    backlight_increase(void);
 void    backlight_decrease(void);
@@ -68,10 +73,13 @@ void backlight_task(void);
 
 #ifdef BACKLIGHT_BREATHING
 
-void backlight_toggle_breathing(void);
-void backlight_enable_breathing(void);
-void backlight_disable_breathing(void);
-bool is_backlight_breathing(void);
+void backlight_toggle_breathing(void) DEPRECATED("backlight_breathing_toggle");
+void backlight_enable_breathing(void) DEPRECATED("backlight_breathing_on");
+void backlight_disable_breathing(void) DEPRECATED("backlight_breathing_off");
+void backlight_breathing_toggle(void);
+void backlight_breathing_on(void);
+void backlight_breathing_off(void);
+bool is_backlight_breathing_on(void);
 
 void    breathing_period_set(uint8_t value);
 uint8_t get_breathing_period(void);

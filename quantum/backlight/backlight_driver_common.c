@@ -23,7 +23,7 @@ static const pin_t backlight_pin = BACKLIGHT_PIN;
 #    define FOR_EACH_LED(x) x
 #endif
 
-static inline void backlight_on(pin_t backlight_pin) {
+static inline void local_backlight_on(pin_t backlight_pin) {
 #if BACKLIGHT_ON_STATE == 0
     writePinLow(backlight_pin);
 #else
@@ -31,7 +31,7 @@ static inline void backlight_on(pin_t backlight_pin) {
 #endif
 }
 
-static inline void backlight_off(pin_t backlight_pin) {
+static inline void local_backlight_off(pin_t backlight_pin) {
 #if BACKLIGHT_ON_STATE == 0
     writePinHigh(backlight_pin);
 #else
@@ -41,13 +41,13 @@ static inline void backlight_off(pin_t backlight_pin) {
 
 void backlight_pins_init(void) {
     // Setup backlight pin as output and output to off state.
-    FOR_EACH_LED(setPinOutput(backlight_pin); backlight_off(backlight_pin);)
+    FOR_EACH_LED(setPinOutput(backlight_pin); local_backlight_off(backlight_pin);)
 }
 
 void backlight_pins_on(void) {
-    FOR_EACH_LED(backlight_on(backlight_pin);)
+    FOR_EACH_LED(local_backlight_on(backlight_pin);)
 }
 
 void backlight_pins_off(void) {
-    FOR_EACH_LED(backlight_off(backlight_pin);)
+    FOR_EACH_LED(local_backlight_off(backlight_pin);)
 }
