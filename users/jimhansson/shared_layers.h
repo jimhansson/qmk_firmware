@@ -14,6 +14,7 @@ enum shared_layers {
 enum shared_keycodes {
   EXT_PLV = _LAST_KEYCODE,
   EXT_CFG,
+  CAS_TOG,
   GAME_ON,
   PRINT_CFG_SETTINGS,
   PLOVER,

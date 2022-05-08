@@ -210,8 +210,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        |  AS  |   #  |   #  |   #  |   #  |      |           |      |   #  |   #  |   #  |   #  |   #  |   #    |
  * |        |  UP  |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |  AS  | COMBO| key  |   #  |   #  |------|           |------|   #  |   #  |   #  |   #  |   #  |   #    |
- * |        |  TGL |  TGL | Overr|      |      |      |           |      |      |      |      |      |      |        |
+ * |        |  AS  | COMBO| key  | Case |   #  |------|           |------|   #  |   #  |   #  |   #  |   #  |   #    |
+ * |        |  TGL |  TGL | Overr| Modes|      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |  AS  |   #  |   #  |   #  |   #  |      |           |      |   #  |   #  |   #  |   #  |   #  |   #    |
  * |        | DOWN |      |      |      |      |      |           |      |      |      |      |      |      |        |
@@ -236,7 +236,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        // left                                                            // right							     
        _______, _______, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______,   DEBUG,
        _______, KC_ASUP, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______, _______,
-       _______,  AS_TOG, CMB_TOG, KEY_TOG, _______, GAME_ON,		           _______, _______, _______, _______, _______, _______,
+       _______,  AS_TOG, CMB_TOG, KEY_TOG, CAS_TOG, GAME_ON,		           _______, _______, _______, _______, _______, _______,
        _______, KC_ASDN, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______, _______,
        EXT_CFG, KC_ASRP, _______, _______, _______,			                    _______, _______, _______, _______, _______,
                                                     _______, _______,	  _______, _______,					     
@@ -370,9 +370,15 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+void leader_start_keymap(void) {
+  ergodox_right_led_1_on();
+  ergodox_right_led_2_on();
+  ergodox_right_led_3_on();  
+}
+
 void leader_end_keymap(bool success) {
   if(success)
-    blink_set_pattern(LEADER_SUCCESS,200, 9);
+    blink_set_pattern(LEADER_SUCCESS, 200, 9);
   else
     blink_set_pattern(LEADER_FAIL, 300, 5);	       
 }

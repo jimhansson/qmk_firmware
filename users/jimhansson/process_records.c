@@ -2,6 +2,7 @@
 #include "process_leader.h"
 #include "keymap_swedish.h"
 #include "shared_layers.h"
+#include "casemodes.h"
 
 bool __WEAK__ process_record_keymap(uint16_t keycode, keyrecord_t *record) {return true;};
 
@@ -34,6 +35,11 @@ void show_cfg_settings() {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  if(!process_case_modes(keycode, record)) {
+    return false; // else I get both the sep and a space.
+  }
+  
   switch(keycode) {
 #ifdef STENO_ENABLE
   case PLOVER:
@@ -77,6 +83,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	combo_disable();
       if(key_override_is_enabled())
 	key_override_off();
+    }
+    break;
+  case CAS_TOG:
+    if(record->event.pressed) {
+      toggle_caps_word();
     }
   case PRINT_CFG_SETTINGS:
     if(record->event.pressed)

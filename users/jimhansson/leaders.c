@@ -5,6 +5,8 @@
 
 #include "shared_layers.h"
 
+#include "casemodes.h"
+
 /// leader stuff
 
 bool did_leader_succeed; // used in leader_start/end_keymap functions
@@ -17,6 +19,31 @@ void __WEAK__ leader_end_keymap(bool succeeded) {;}
 void matrix_scan_user(void) {
   LEADER_DICTIONARY() {
     did_leader_succeed = leading = false;
+
+    SEQ_ONE_KEY(SE_UNDS) {
+      enable_xcase_with(SE_UNDS);
+      did_leader_succeed = true;
+    }
+    SEQ_ONE_KEY(SE_MINS) {
+      enable_xcase_with(SE_MINS);
+      did_leader_succeed = true;
+    }
+    SEQ_ONE_KEY(SE_SLSH) {
+      enable_xcase_with(SE_SLSH);
+      did_leader_succeed = true;
+    }
+    SEQ_ONE_KEY(SE_COMM) {
+      enable_xcase_with(SE_COMM);
+      did_leader_succeed = true;
+    }
+    SEQ_ONE_KEY(SE_DOT) {
+      enable_xcase_with(SE_DOT);
+      did_leader_succeed = true;
+    }
+    SEQ_ONE_KEY(SE_BSLS) {
+      enable_xcase_with(SE_BSLS);
+      did_leader_succeed = true;
+    }    
 
     SEQ_TWO_KEYS(SE_A, SE_S){ // autoshift toggle
       autoshift_toggle();
@@ -46,7 +73,6 @@ void matrix_scan_user(void) {
       did_leader_succeed = true;
     }
     SEQ_FOUR_KEYS(SE_O, SE_V, SE_E, SE_R) {
-      // switch to layer for configuration
       key_override_toggle();
       did_leader_succeed = true;
     }
@@ -68,6 +94,11 @@ void matrix_scan_user(void) {
       did_leader_succeed = true;
     }
 #endif
+
+    SEQ_ONE_KEY(SE_X) { // x-case
+      enable_xcase();
+      did_leader_succeed = true;
+    }
 
     leader_end();
   }

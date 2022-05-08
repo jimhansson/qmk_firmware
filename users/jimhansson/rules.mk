@@ -40,7 +40,8 @@ SRC +=  \
 	combos.c \
 	overrides.c \
 	leaders.c \
-	process_records.c
+	process_records.c \
+	casemodes.c
 
 #PROGRAMMABLE_BUTTON_ENABLE = yes
 
