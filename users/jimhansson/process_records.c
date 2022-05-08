@@ -89,6 +89,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if(record->event.pressed) {
       toggle_caps_word();
     }
+    break;
   case PRINT_CFG_SETTINGS:
     if(record->event.pressed)
       show_cfg_settings();

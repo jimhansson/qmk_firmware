@@ -20,7 +20,7 @@ void matrix_scan_user(void) {
   LEADER_DICTIONARY() {
     did_leader_succeed = leading = false;
 
-    SEQ_ONE_KEY(SE_UNDS) {
+    SEQ_ONE_KEY(SE_U) {
       enable_xcase_with(SE_UNDS);
       did_leader_succeed = true;
     }
@@ -40,16 +40,22 @@ void matrix_scan_user(void) {
       enable_xcase_with(SE_DOT);
       did_leader_succeed = true;
     }
-    SEQ_ONE_KEY(SE_BSLS) {
+    SEQ_ONE_KEY(SE_Y) {
       enable_xcase_with(SE_BSLS);
       did_leader_succeed = true;
-    }    
+    }
+    
+    SEQ_ONE_KEY(SE_D) {  // eisier to write defines.  
+      enable_xcase_with(SE_UNDS);
+      enable_caps_word();
+      did_leader_succeed = true;
+    }   
 
     SEQ_TWO_KEYS(SE_A, SE_S){ // autoshift toggle
       autoshift_toggle();
       did_leader_succeed = true;
     }
-    
+   
     SEQ_THREE_KEYS(SE_C, SE_A, SE_P) { // cap = Caps lock
       register_code(KC_CAPS_LOCK);
       unregister_code(KC_CAPS_LOCK);
@@ -101,7 +107,7 @@ void matrix_scan_user(void) {
     }
 
     leader_end();
-  }
+  }  
   matrix_scan_keymap();
 }
 
