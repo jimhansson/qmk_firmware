@@ -19,18 +19,21 @@ void show_cfg_settings() {
   SEND_STRING("notepad");
   tap_code(KC_ENT);
   wait_ms(50);
-  SEND_STRING("AS: ");
+  SEND_STRING("a AS ");
   get_autoshift_state() ? SEND_STRING("on") : SEND_STRING("off");
-  SEND_STRING(" timeout: ");
+  SEND_STRING(" timeout ");
   char display[8];
   snprintf(display, 8, "%d", get_generic_autoshift_timeout());
   send_string((const char*)display);
   tap_code(KC_ENT);
-  SEND_STRING("COMBO: ");
+  SEND_STRING("s COMBO ");
   is_combo_enabled() ? SEND_STRING("on") : SEND_STRING("off");
   tap_code(KC_ENT);
-  SEND_STRING("KEY OVERRIDE: ");
+  SEND_STRING("d KEY OVERRIDE ");
   key_override_is_enabled() ? SEND_STRING("on") : SEND_STRING("off");
+  tap_code(KC_ENT);
+  SEND_STRING("f CAPS WORD ");
+  caps_word_enabled() ? SEND_STRING("on") : SEND_STRING("off");
   tap_code(KC_ENT);
 }
 
@@ -101,4 +104,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
