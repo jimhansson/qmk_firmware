@@ -38,9 +38,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `--------------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
-    KC_DELT,                      SE_Q,    SE_W,     SE_E,    SE_R,    SE_T,    SE_Y,    SE_U,  SE_I,     SE_O,     SE_P,                     SE_ARNG,
-    KC_LEAD,                      SE_A,    SE_S,     SE_D,    SE_F,    SE_G,    SE_H,    SE_J,  SE_K,     SE_L,     LT(_MEDIA,SE_ODIA),       SE_ADIA,
-    KC_LSPO,               CTL_T(SE_Z),    SE_X,     SE_C,    SE_V,    SE_B,    SE_N,    SE_M,  SE_COMM,  SE_DOT,   CTL_T(SE_MINS),           KC_RSPC,
+     KC_DEL,                      SE_Q,    SE_W,     SE_E,    SE_R,    SE_T,    SE_Y,    SE_U,  SE_I,     SE_O,     SE_P,                     SE_ARNG,
+    QK_LEAD,                      SE_A,    SE_S,     SE_D,    SE_F,    SE_G,    SE_H,    SE_J,  SE_K,     SE_L,     LT(_MEDIA,SE_ODIA),       SE_ADIA,
+    SC_LSPO,               CTL_T(SE_Z),    SE_X,     SE_C,    SE_V,    SE_B,    SE_N,    SE_M,  SE_COMM,  SE_DOT,   CTL_T(SE_MINS),           SC_RSPC,
     LT(_SYMBOLS,SE_QUOT),      SE_ACUT, KC_LALT,  KC_LGUI, KC_BSPC,  KC_ENT,  KC_SPC,  KC_TAB,  KC_DOWN,  SE_CIRC,  SE_ASTR,             TT(_SYMBOLS)
 ),
 #if 0
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  SE_QUOT, SE_COMM,  SE_DOT,    SE_P,     SE_Y,    SE_F,    SE_G,    SE_C,    SE_R,    SE_L,    KC_BSPC,
     KC_LEAD,     SE_A,    SE_O,    SE_E,    SE_U,     SE_I,    SE_D,    SE_H,    SE_T,    SE_N,    SE_S,    SE_SLSH,
     KC_LSPO,  SE_SCLN,    SE_Q,    SE_J,    SE_K,     SE_X,    SE_B,    SE_M,    SE_W,    SE_V,    SE_Z,     KC_ENT,
-    BACKLIT,  KC_LCTL, KC_LALT, KC_LGUI, KC_BSPC,   KC_ENT,  KC_SPC,  KC_TAB,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    BACKLIT,  KC_LCTL, KC_LALT, KC_LGUI, KC_BSPC,   KC_ENT,  KC_SPC,  KC_TAB,   KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT
 ),
 #endif
 /* symbols
@@ -183,12 +183,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 [_CFG] = LAYOUT_planck_grid(
-    _______, KC_ASUP, _______,   _______,   AU_ON,  _______,  _______,  _______,  _______,  _______,  _______,    DEBUG,
-    _______,  AS_TOG, CMB_TOG,   KEY_TOG,  AU_OFF,  GAME_ON,  _______,   QWERTY,   DVORAK,  COLEMAK,   PLOVER,  _______,
-    _______, KC_ASDN, _______,   _______,  MUV_DE,   MUV_IN,  BACKLIT,  _______,  _______,  _______,  _______,  _______,
-    EXT_CFG, KC_ASRP, _______,   _______, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
+    _______,   AS_UP, _______,   _______, AU_TOGG,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
+    _______, AS_TOGG, CM_TOGG,   KEY_TOG, GAME_ON,  _______,  _______,   QWERTY,   DVORAK,  COLEMAK,   PLOVER,  _______,
+    _______, AS_DOWN, _______,   _______, MU_TOGG,  _______,  BACKLIT,  _______,  _______,  _______,  _______,  _______,
+    EXT_CFG,  AS_RPT, _______,   _______, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
 )
-
 
 };
 
@@ -239,26 +238,8 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 void matrix_scan_keymap(void) {
 }
 
-#ifdef AUDIO_ENABLE
-float song_leader_start[][2] = SONG(CHROMATIC_SOUND);
-float song_leader_succeed[][2] = SONG(MAJOR_SOUND);
-float song_leader_fail[][2] = SONG(MINOR_SOUND);
-#endif
-
 void leader_start_keymap(void) {
-#ifdef AUDIO_ENABLE
-    PLAY_SONG(song_leader_start);
-#endif
 }
 
 void leader_end_keymap(bool succeeded) {
-  if (succeeded) {
-#ifdef AUDIO_ENABLE
-    PLAY_SONG(song_leader_succeed);
-#endif
-  } else {
-#ifdef AUDIO_ENABLE
-    PLAY_SONG(song_leader_fail);
-#endif
-  }
 }

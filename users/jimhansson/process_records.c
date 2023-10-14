@@ -14,11 +14,6 @@ bool __WEAK__ process_record_keymap(uint16_t keycode, keyrecord_t *record) {retu
 void show_cfg_settings(void);
 
 void show_cfg_settings() {
-  SEND_STRING(SS_LWIN("r"));
-  wait_ms(50);
-  SEND_STRING("notepad");
-  tap_code(KC_ENT);
-  wait_ms(50);
   SEND_STRING("a AS ");
   get_autoshift_state() ? SEND_STRING("on") : SEND_STRING("off");
   SEND_STRING(" timeout ");
@@ -29,9 +24,11 @@ void show_cfg_settings() {
   SEND_STRING("s COMBO ");
   is_combo_enabled() ? SEND_STRING("on") : SEND_STRING("off");
   tap_code(KC_ENT);
+#ifdef KEY_OVERRIDE_ENABLE
   SEND_STRING("d KEY OVERRIDE ");
   key_override_is_enabled() ? SEND_STRING("on") : SEND_STRING("off");
   tap_code(KC_ENT);
+#endif
   SEND_STRING("f CAPS WORD ");
   caps_word_enabled() ? SEND_STRING("on") : SEND_STRING("off");
   tap_code(KC_ENT);
@@ -79,13 +76,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     }
   case GAME_ON:
+    // disables things that are in the way in games
     if(record->event.pressed) {
       if(get_autoshift_state())
 	autoshift_disable();
       if(is_combo_enabled())
 	combo_disable();
+#ifdef KEY_OVERRIDE_ENABLE
       if(key_override_is_enabled())
 	key_override_off();
+#endif
     }
     break;
   case CAS_TOG:

@@ -38,9 +38,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT_ergodox_pretty(
   // left hand
   XXXXXXX,          SE_EXLM,        SE_DQUO,       SE_HASH, SE_CURR, SE_PERC,   TG(NUMB),         TG(CMDS),     SE_AMPR, SE_SLSH,   SE_LPRN,    SE_RPRN,    SE_EQL,               SE_PLUS,	  	 
-  KC_DELT,          SE_Q,           SE_W,          SE_E,    SE_R,    SE_T,      TG(SYMB),	  TG(MDIA),     SE_Y,    SE_U,      SE_I,       SE_O,       SE_P,                 SE_ARNG,	   
-  KC_LEAD,          SE_A,           SE_S,          SE_D,    SE_F,    SE_G,	       		                SE_H,    SE_J,      SE_K,       SE_L,       LT(MDIA, SE_ODIA),    GUI_T(SE_ADIA),  
-  KC_LSPO,          CTL_T(SE_Z),    SE_X,          SE_C,    SE_V,    SE_B,  ALL_T(KC_NO),	  MEH_T(KC_NO), SE_N,    SE_M,      SE_COMM,    SE_DOT,     CTL_T(SE_MINS),       KC_RSPC,	   
+  KC_DEL ,          SE_Q,           SE_W,          SE_E,    SE_R,    SE_T,      TG(SYMB),	  TG(MDIA),     SE_Y,    SE_U,      SE_I,       SE_O,       SE_P,                 SE_ARNG,	   
+  QK_LEAD,          SE_A,           SE_S,          SE_D,    SE_F,    SE_G,	       		                SE_H,    SE_J,      SE_K,       SE_L,       LT(MDIA, SE_ODIA),    GUI_T(SE_ADIA),  
+  SC_LSPO,          CTL_T(SE_Z),    SE_X,          SE_C,    SE_V,    SE_B,  ALL_T(KC_NO),	  MEH_T(KC_NO), SE_N,    SE_M,      SE_COMM,    SE_DOT,     CTL_T(SE_MINS),       SC_RSPC,	   
   LT(SYMB,SE_QUOT), SE_ACUT,        LALT(KC_LSFT), KC_LEFT, TT(MDIA),				                     TT(MDIA),      KC_DOWN,    SE_CIRC,    SE_ASTR,              TT(SYMB),	   
                                                             ALT_T(KC_APP),       KC_LGUI,	  KC_ALGR,      CTL_T(KC_ESC),								   
                                                                                  KC_HOME,	  KC_PGUP,											   
@@ -162,8 +162,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        // left                                                            // right							     
        _______, _______, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______, _______,
        _______, _______, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______, _______,
-       _______, KC_SLCK, PRV_APP, NXT_APP, _______, _______,		           _______, _______, KILLX,   LOGIN,   _______, _______,
-       _______, _______, _______, KC_CAPS, _______, _______, _______,	  _______, KC_NLCK, _______, _______, _______, _______, _______,
+       _______, KC_LSCR, PRV_APP, NXT_APP, _______, _______,		           _______, _______, KILLX,   LOGIN,   _______, _______,
+       _______, _______, _______, KC_LCAP, _______, _______, _______,	  _______, KC_LNUM, _______, _______, _______, _______, _______,
        _______, _______, _______, _______, _______,			                    _______, _______, _______, _______, _______,
                                                     _______, _______,	  _______, _______,					     
                                                              _______,	  _______,							     
@@ -226,7 +226,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |   #  |   #  |------|       |------|   #  |   #  |
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
-
  * 
  * This keymap is for complex commands that we would like to have
  * easier access to, things like the three finger salute needed to
@@ -234,11 +233,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_CFG] = LAYOUT_ergodox_pretty(
        // left                                                            // right							     
-       _______, _______, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______,   DEBUG,
-       _______, KC_ASUP, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______,  PRNCFG,
-       _______,  AS_TOG, CMB_TOG, KEY_TOG, CAS_TOG, GAME_ON,		           _______, _______, _______, _______, _______, _______,
-       _______, KC_ASDN, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______, _______,
-       EXT_CFG, KC_ASRP, _______, _______, _______,			                    _______, _______, _______, _______, _______,
+       _______, _______, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______, _______,
+       _______,   AS_UP, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______,  PRNCFG,
+       _______, AS_TOGG, CM_TOGG, KEY_TOG, CAS_TOG, GAME_ON,		           _______, _______, _______, _______, _______, _______,
+       _______, AS_DOWN, _______, _______, _______, _______, _______,	  _______, _______, _______, _______, _______, _______, _______,
+       EXT_CFG,  AS_RPT, _______, _______, _______,			                    _______, _______, _______, _______, _______,
                                                     _______, _______,	  _______, _______,					     
                                                              _______,	  _______,							     
                                            _______, _______, _______, 	  _______, _______, _______                                                 

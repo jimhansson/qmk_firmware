@@ -32,7 +32,7 @@ DYNAMIC_MACRO_ENABLE = no
 
 COMBO_ENABLE = yes
 
-KEY_OVERRIDE_ENABLE = yes
+KEY_OVERRIDE_ENABLE = no
 
 AUDIO_ENABLE = yes
 # Include common utilities shared across all our keymaps.

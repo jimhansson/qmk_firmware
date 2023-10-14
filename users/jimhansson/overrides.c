@@ -8,6 +8,7 @@ const key_override_t cut_override = ko_make_basic(MOD_MASK_CTRL, KC_X, KC_CUT);
 const key_override_t copy_override = ko_make_basic(MOD_MASK_CTRL, KC_C, KC_COPY);
 const key_override_t paste_override = ko_make_basic(MOD_MASK_CTRL, KC_V, KC_PASTE);
 
+// for some reason it is not called KC_REDO but KC_AGAIN, lets fix it.
 #define KC_REDO KC_AGAIN
 const key_override_t undo_override = ko_make_basic(MOD_MASK_CTRL, KC_Z, KC_UNDO);
 const key_override_t redo_override = ko_make_basic(MOD_MASK_CTRL, KC_Y, KC_REDO);

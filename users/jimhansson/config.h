@@ -8,7 +8,7 @@
 #define LSPO_KEYS KC_LSFT, KC_LSFT, KC_8
 #define RSPC_KEYS KC_RSFT, KC_RSFT, KC_9
 
-#define KEY_TOG KEY_OVERRIDE_TOGGLE
+#define KEY_TOG QK_KEY_OVERRIDE_TOGGLE
 #define AS_TOG KC_ASTG
 
 // make sure we can press as many buttons as possible at the same time.
@@ -17,7 +17,7 @@
 // auto shift //
 // if we want to auto-shift anything else than the alphas,
 // we will do that in the keymap instead.
-#define AUTO_SHIFT_TIMEOUT 250 
+#define AUTO_SHIFT_TIMEOUT 250
 #define NO_AUTO_SHIFT_NUMERIC
 #define NO_AUTO_SHIFT_SPECIAL
 #define AUTO_SHIFT_REPEAT
