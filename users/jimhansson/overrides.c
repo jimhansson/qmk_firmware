@@ -1,4 +1,5 @@
 
+#include <stddef.h>
 #include "process_key_override.h"
 
 // here we will override normal shortcuts that have a higher media key

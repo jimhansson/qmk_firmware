@@ -1,5 +1,7 @@
 
-#include "process_combo.h"
+//#include "process_combo.h"
+//#include "quantum/action_util.h"
+#include "quantum.h"
 
 // mainly use combos to avoid having to leave homerow to use
 // modifiers, will use one-shot-modifiers for that
@@ -21,7 +23,11 @@
 //   bool get_combo_must_press_in_order(uint16_t index, combo_t *combo)
 //   Controls if a given combo should fire only if its keys are pressed in order. (default: true)
 
-
+    /* OSM(mod) - Momentarily hold down mod. You must use the MOD_* keycodes as shown in Mod Tap, not the KC_* codes. */
+    /* OSL(layer) - momentary switch to layer. */
+    /* OS_ON - Turns on One Shot keys. */
+    /* OS_OFF - Turns off One Shot keys. OSM act as regular mod keys, OSL act like MO. */
+    /* OS_TOGG - Toggles the one shot key status. */
 /*
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     // Disable combo `SOME_COMBO` on layer `_LAYER_A`
@@ -82,11 +88,10 @@ enum combos {
   CMB_LALT,
   CMB_RALT,
   CMB_INS,
-  CMB_DEL,
-  COMBO_LENGTH,
+  CMB_DEL
 };
 
-combo_t key_combos[COMBO_LENGTH] = {
+combo_t key_combos[] = {
   [CMB_LCTL] = COMBO_ACTION(df_combo),
   [CMB_RCTL] = COMBO_ACTION(jk_combo),
   [CMB_LALT] = COMBO_ACTION(sd_combo),
@@ -95,7 +100,6 @@ combo_t key_combos[COMBO_LENGTH] = {
   [CMB_DEL]  = COMBO_ACTION(we_combo),
 };
 
-uint16_t COMBO_LEN = COMBO_LENGTH;
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch(combo_index) {
