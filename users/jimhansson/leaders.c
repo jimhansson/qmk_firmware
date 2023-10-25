@@ -1,4 +1,6 @@
 
+#include "quantum/quantum.h"
+
 #include "keymap_swedish.h"
 #include "process_leader.h"
 

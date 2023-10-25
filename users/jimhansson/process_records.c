@@ -1,4 +1,6 @@
 
+#include "quantum/quantum.h"
+
 #include "process_leader.h"
 #include "keymap_swedish.h"
 #include "shared_layers.h"

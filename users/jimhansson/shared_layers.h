@@ -1,4 +1,3 @@
-
 #pragma once
 // this should be included after the layers and keycode enums, with
 // markes that tells the where these enums should start.
@@ -19,5 +18,17 @@ enum shared_keycodes {
   PRINT_CFG_SETTINGS,
   PLOVER,
 };
+
+enum combos {
+  CMB_LCTL = 0,
+  CMB_RCTL,
+  CMB_LALT,
+  CMB_RALT,
+  CMB_INS,
+  CMB_DEL,
+  CMB_LENGTH
+};
+
+combo_t key_combos[CMB_LENGTH];
 
 #define PRNCFG PRINT_CFG_SETTINGS

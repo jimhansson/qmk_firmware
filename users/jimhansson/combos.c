@@ -1,7 +1,9 @@
 
 //#include "process_combo.h"
 //#include "quantum/action_util.h"
-#include "quantum.h"
+#include "quantum/quantum.h"
+
+#include "shared_layers.h"
 
 // mainly use combos to avoid having to leave homerow to use
 // modifiers, will use one-shot-modifiers for that
@@ -81,15 +83,6 @@ const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM as_combo[] = {KC_A, KC_S, COMBO_END};
 const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
 const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
-
-enum combos {
-  CMB_LCTL = 0,
-  CMB_RCTL,
-  CMB_LALT,
-  CMB_RALT,
-  CMB_INS,
-  CMB_DEL
-};
 
 combo_t key_combos[] = {
   [CMB_LCTL] = COMBO_ACTION(df_combo),
