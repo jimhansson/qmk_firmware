@@ -3,6 +3,7 @@
 // markes that tells the where these enums should start.
 #include "layers.h"
 
+
 enum shared_layers {
   _CFG = _LAST_LAYER,
 #ifdef STENO_ENABLE
@@ -29,6 +30,9 @@ enum combos {
   CMB_LENGTH
 };
 
+// we need to have it here because of something in
+// keymap_introspection.c that tries to evaulate if it is correctly
+// done. 
 combo_t key_combos[CMB_LENGTH];
 
 #define PRNCFG PRINT_CFG_SETTINGS
